@@ -14,7 +14,7 @@
 </noscript>
 <script>
 // Edit to suit your needs.
-var  default_range = [
+var  base_range = [
     '0px    to 760px  = mobile.min.css',
     '760px  to 980px  = 720.min.css',
     '980px  to 1280px = 960.min.css',
@@ -22,12 +22,13 @@ var  default_range = [
     '1600px to 1920px = 1560.min.css',
     '1920px           = fluid.min.css'
   ];
+// Additional ranges for devices
 var portrait_range = [
  	'0px	to 360px  = iphone-portrait.css',
 	'360px			  = ipad-portrait.css'
   ];
 var landscape_range = [
-	'0px	to 480px  = mobile.css',
+	'0px	to 480px  = iphone-landscape.css',
 	'480px			  = ipad-landscape.css'
 ]
 var ADAPT_CONFIG = {
@@ -42,23 +43,13 @@ var ADAPT_CONFIG = {
   // Last range entry is the maximum.
   // Separate ranges by "to" keyword.
 
-  range: default_range,
-
-  // Additional ranges for devices
-  portrait_range: [
- 	'0px	to 360px  = iphone-portrait.css',
-	'360px			  = ipad-portrait.css'
-  ],
-  landscape_range: [
-	'0px	to 480px  = mobile.css',
-	'480px			  = ipad-landscape.css'
-  ],
+  range: base_range,
   // Map the device ranges to specific orientations
   orientation: {
-	'0': this.portrait_range,
-	'90': this.landscape_range,
-	'-90': this.landscape_range,
-	'180': this.portrait_range	
+	'0': portrait_range,
+	'90': landscape_range,
+	'-90': landscape_range,
+	'180': portrait_range	
   }
 };
 </script>
@@ -222,21 +213,24 @@ var ADAPT_CONFIG = {
   ]
 
   // Optional configuration for devices
-  // Define ranges for portrait and landscape orientations
-  portrait_range: [
- 	'0px	to 360px  = iphone-portrait.css',
-	'360px		  = ipad-portrait.css'
-  ],
-  landscape_range: [
-	'0px 	to 480px  = iphone-landscape.css',
-	'480px		  = ipad-landscape.css'
-  ],
-  // Map the device ranges to specific orientations
+  // Define ranges for portrait (0 and 180) and landscape (90 and -90) orientations
   orientation: {
-	'0': this.portrait_range,
-	'90': this.landscape_range,
-	'-90': this.landscape_range,
-	'180': this.portrait_range	
+	'0': [
+	 	'0px	to 360px  = iphone-portrait.css',
+		'360px			  = ipad-portrait.css'
+	  ],
+	'90': [
+		  '0px	to 480px  = iphone-landscape.css',
+		  '480px			  = ipad-landscape.css'
+		],
+	'-90': [
+		  '0px	to 480px  = iphone-landscape.css',
+		  '480px			  = ipad-landscape.css'
+		],
+	'180': [
+	 	  '0px	to 360px  = iphone-portrait.css',
+		  '360px			  = ipad-portrait.css'
+	  	]	
   }
 };</pre>
   </div>
