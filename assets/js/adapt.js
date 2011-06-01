@@ -19,6 +19,7 @@
   var path = config.path ? config.path : '';
   var range = config.range;
   var range_len = range.length;
+  var orientation = config.orientation ? config.orientation : {'0': range};
 
   // Create empty link tag:
   // <link rel="stylesheet" />
@@ -41,6 +42,15 @@
     // Really it belongs in react(),
     // but doesn't do any harm here.
     clearInterval(timer);
+    
+    // Get device orientation
+    var device_orientation = w.orientation;
+    var is_device = ([0,90,-90,180].indexOf(device_orientation) >= 0);
+    
+    if (is_device) {
+        range = orientation[device_orientation.toString()] ? orientation[device_orientation.toString()] : orientation['0'];
+        range_len = range.length;
+    }
 
     // Parse browser width.
     var width = w.innerWidth || d.documentElement.clientWidth || d.body.clientWidth || 0;
